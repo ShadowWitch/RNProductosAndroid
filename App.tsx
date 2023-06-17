@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
 
-export default function App() {
+import { NavigationContainer } from '@react-navigation/native';
+import { Navigator } from './src/navigation/Navigator';
+import { AuthProvider } from './src/context/AuthContext';
+import { ProductsProvider } from './src/context/ProductsContext';
+
+//* CLOUDINARY_URL=cloudinary://924484792946237:WrEDiCtnFG4bwLfnaAZc5lES3hE@dgt01p0qg
+
+// cafe_user
+// iHmwtkZ3zR9x2I8t
+
+const AppState = ({ children }: any) => {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <ProductsProvider>
+        {children}
+      </ProductsProvider>
+    </AuthProvider>
+  )
+}
+
+const App = () => {
+
+  return (
+    <NavigationContainer>
+      <AppState>
+        <Navigator />
+      </AppState>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
